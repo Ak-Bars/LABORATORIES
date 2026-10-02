@@ -66,9 +66,6 @@ set OMP_SCHEDULE=guided,1000
 task2.exe 8 16000
 ```
 
-> ⚠️ В Windows **нельзя** писать `set OMP_SCHEDULE="static,1000"` с кавычками,
-> и **нельзя** ставить пробел после запятой. Пишите `static,1000` без пробелов.
-
 ### Linux / macOS / MinGW
 ```bash
 OMP_SCHEDULE="static" ./task2 8 16000
