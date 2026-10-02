@@ -1,45 +1,46 @@
-Задача 3 — OpenMP: обратный порядок потоков
+# Задача 3 — OpenMP: обратный порядок потоков
 
+## Описание
 Модификация Задачи 1: потоки печатают свои идентификаторы
 в обратном порядке (от N-1 до 0).
 
 Реализовано 5 способов:
 
-1. ordered — упорядоченное выполнение через `#pragma omp ordered`
-2. atomic — активное ожидание
-3. chain — цепочка флагов
-4. barrier — барьер + single
-5. critical — критическая секция
+1. **ordered** — упорядоченное выполнение через `#pragma omp ordered`
+2. **atomic** — атомарный спинлок (активное ожидание)
+3. **chain** — цепочка флагов (эстафета)
+4. **barrier** — барьер + `single` (центральный координатор)
+5. **critical** — критическая секция
 
-Сборка
+## Сборка
 
-MSVC (Developer Command Prompt)
+### MSVC (Developer Command Prompt)
 ```cmd
 cl /openmp /O2 main.c
 ```
 
-GCC / Clang (Linux, macOS, MinGW)
+### GCC / Clang (Linux, macOS, MinGW)
 ```bash
 gcc -fopenmp -O2 -o task3 main.c
 ```
 
-Запуск
+## Запуск
 
-Синтаксис
+### Синтаксис
 ```
 task3.exe <num_threads> [method]
 ```
 
-- num_threads — число потоков (положительное целое).
-- metho` — способ: ordered, atomic, chain, barrier, critical, all.
-  По умолчанию — al` (все 5 методов подряд).
+- `num_threads` — число потоков (положительное целое).
+- `method` — способ: `ordered`, `atomic`, `chain`, `barrier`, `critical`, `all`.
+  По умолчанию — `all` (все 5 методов подряд).
 
-Все 5 методов подряд
+### Все 5 методов подряд
 ```cmd
 task3.exe 8 all
 ```
 
-Конкретный метод
+### Конкретный метод
 ```cmd
 task3.exe 8 ordered
 task3.exe 8 atomic
@@ -48,7 +49,7 @@ task3.exe 8 barrier
 task3.exe 8 critical
 ```
 
-Linux / macOS / MinGW
+### Linux / macOS / MinGW
 ```bash
 ./task3 8 all
 ./task3 8 ordered
@@ -58,8 +59,9 @@ Linux / macOS / MinGW
 ./task3 8 critical
 ```
 
-Ожидаемый результат
+## Ожидаемый результат
 Во всех методах порядок строк строго от `N-1` до `0`:
+
 ```
 Thread 7 of 8: Hello World
 Thread 6 of 8: Hello World
